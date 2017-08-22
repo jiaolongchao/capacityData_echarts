@@ -131,15 +131,16 @@
 						<div class="headerBarSmall"><span>筹码成本：</span><span>近期该股筹码平均交易成本为19.69元，该股获筹码青睐，且集中度渐增。</span></div>
 						<div class="cartogram echarts-wrapper-costChip">
 							<span class="costchipName">筹码成本：19.69</span>
-							<div id="costChip" class="echarts-wrapper-costChip"></div>
-							<script src="js/costChip.js"></script>
+							<div id="crossEchart" class="echarts-wrapper-costChip"></div>
+							<!--<script src="js/costChip.js"></script>-->
+							<script src="js/cross.js"></script>
 						</div>
 					</div>
 					<div class="partRight">
 						<div class="headerBarSmall"><span>控盘力度：</span><span>过去5个交易日该股主力没有控盘，筹码分布非常分散，主力成交额0.84亿元，占总成交额的6.61%。</span></div>
 						<div class="cartogram">
 							<div class="rotateobj">
-								<span class="rotate_sp1">高度控盘</span><span class="rotate_sp2">轻度控盘</span><span class="rotate_sp3">没有控盘</span><span class="rotate_sp4">中度控盘</span>
+								<div class="rotateSpan"><span class="rotate_sp1">高度控盘</span><span class="rotate_sp2">轻度控盘</span><span class="rotate_sp3">没有控盘</span><span class="rotate_sp4">中度控盘</span></div>
 								<div class="rotatpart">
 									<div class="arrow"></div>
 									<div class="rotatebg" style="transform: rotate(135deg) scale(1);"></div>
@@ -152,15 +153,19 @@
                                         var BankeDate = 3;  //BankeDate表示接口数据 1:高度控盘 2:轻度 3:没有 4:中度
                                         var Bankerotate = [0,90,180,270]; //表示箭头指向的角度
                                         if(BankeDate == 1){
-                                            $('.arrow').css('transform','rotate('+ Bankerotate[0] +'deg)');
+                                            BankerotateFn(0)
 										}else if(BankeDate == 2){
-                                            $('.arrow').css('transform','rotate('+ Bankerotate[1] +'deg)');
+                                            BankerotateFn(1)
 										}else if(BankeDate == 3){
-                                            $('.arrow').css('transform','rotate('+ Bankerotate[2] +'deg)');
+                                            BankerotateFn(2)
 										}else if(BankeDate == 4){
-                                            $('.arrow').css('transform','rotate('+ Bankerotate[3] +'deg)');
+                                            BankerotateFn(3)
                                         }else{
-                                            $('.arrow').css('transform','rotate('+ Bankerotate[0] +'deg)');
+                                            BankerotateFn(0)
+										}
+										function BankerotateFn(num){
+                                            $('.arrow').css('transform','rotate('+ Bankerotate[num] +'deg)');
+                                            setTimeout(function(){$('.rotateSpan span').eq(num).addClass('gaugeActive').siblings('span').removeClass('gaugeActive')},1000)
 										}
                                     })
 								</script>
@@ -176,7 +181,41 @@
 					</div>
 					<div class="partRight">
 						<div class="headerBarSmall"><span>阻力位支撑位：</span><span>该股短期阻力位21.84，支撑位16.57，处于震荡区间内。</span></div>
-						<div class="cartogram"></div>
+						<div class="cartogram gaugepart">
+							<div class="gaugeSpan"><span class="gaugeSp1">跌破</span><span class="gaugeSp2">强支撑</span><span class="gaugeSp3">弱支撑</span><span class="gaugeSp4">震荡</span><span class="gaugeSp5">弱阻力</span><span class="gaugeSp6">强阻力</span><span class="gaugeSp7">突破</span></div>
+							<div id="gaugeCharts" class="gaugeCharts">
+								<div class="gaugePointer"></div>
+								<!--<script src="js/gauge.js"></script>-->
+							</div>
+							<!--<div class="gaugeBg"></div>-->
+							<script>
+                                $(function () {
+                                    var gaugeDate = 7;  //BankeDate表示接口数据 1:跌破 2:强支撑 3:弱支撑 4:震荡 5:弱阻力 6:强阻力 7:突破
+                                    var gaugeRotateArr = [-74,-37,0,37,73,109,144] //表示箭头指向的角度
+                                    if(gaugeDate == 1){
+                                        gaugeRotateFn(0);
+                                    }else if(gaugeDate == 2){
+                                        gaugeRotateFn(1);
+                                    }else if(gaugeDate == 3){
+                                        gaugeRotateFn(2);
+                                    }else if(gaugeDate == 4){
+                                        gaugeRotateFn(3);
+                                    }else if(gaugeDate == 5){
+                                        gaugeRotateFn(4);
+                                    }else if(gaugeDate == 6){
+                                        gaugeRotateFn(5);
+                                    }else if(gaugeDate == 7){
+                                        gaugeRotateFn(6);
+                                    }else{
+                                        gaugeRotateFn(0);
+                                    }
+                                    function gaugeRotateFn(num){
+                                        $('.gaugePointer').css('transform','rotate('+ gaugeRotateArr[num] +'deg)');
+                                        setTimeout(function(){$('.gaugeSpan span').eq(num).addClass('gaugeActive').siblings('span').removeClass('gaugeActive')},1000)
+                                    }
+                                })
+							</script>
+						</div>
 					</div>
 				</div>
 				<div class="titleBarSmall"><span class="titleBarAcronym">价值透视</span><span>最近一年，白云机场主营收入平稳增长，公司总体资产亦较为平稳，但增速较低。近期该公司股东人数连续减少。</span></div>

@@ -24,9 +24,9 @@ body{}
 .tipbar .closed{ float:right; color: #9B9B9B;}
 .content{ padding: 10px; padding-bottom: 15px;}
 .tipbarSmall{ height: 45px;background: #272C30; line-height: 45px; text-align:left; color: #F6A623;}
-.icon_bulb{ width:22px; height: 22px; background: #272C30; display: inline-block; vertical-align: middle; margin-right:10px;}
-.icon_uparrow{ width: 12px; height: 12px; background: #272C30; display: inline-block; vertical-align: middle; margin-right:10px;}
-.icon_note{width: 14px; height: 16px; display: inline-block; vertical-align: middle; margin-right:10px;}
+.icon_bulb{ width:22px; height: 22px; background: #272C30; display: inline-block; vertical-align: middle; margin-right:10px; background: url("../images/icon_bulb.png") no-repeat;}
+.icon_uparrow{ width: 12px; height: 20px; display: inline-block; vertical-align: middle; margin-left: 7px; margin-right:10px; background: url("../images/icon_uparrow.png") no-repeat; position: relative; bottom: 3px;}
+.icon_note{width: 16px; height: 17px; display: inline-block; vertical-align: middle; margin-right:10px; background: url("../images/icon_note.png") no-repeat;}
 .sectionPanel{ padding:10px; }
 .sectionPanel .partLeft{ float: left; width: 485px; margin-right: 10px;}
 .sectionPanel .partRight{ float: left; width: 485px;}
@@ -166,8 +166,23 @@ body{}
 .rotate_sp3{ left: 168px; top: 304px}
 .rotate_sp4{ left: 0; top: 157px}
 .rotatpart{ position: relative; width: 185px; height: 185px; margin: 0 auto; top: 75px;}
-.arrow{ width: 90px; height: 122px; background: url("../images/arrow.png") no-repeat; position: absolute; z-index: 300; left: 48px; top: -30px;transform-origin: 45px 122px; transition: linear .8s;}
+.arrow{ width: 90px; height: 122px; background: url("../images/arrow.png") no-repeat; position: absolute; z-index: 300; left: 46px; top: -30px;transform-origin: 45px 122px; transition: linear .8s;background-size: contain;}
 .rotatpart:after{ content: ''; border-left: dashed 1px rgba(255,255,255,0.2); width: 10px; height: 256px; position: absolute; left: 92px; top: -35px;}
 .rotatpart:before{ content: ''; border-top: dashed 1px rgba(255,255,255,0.2); width: 256px; height: 10px; position: absolute; left: -34px; top: 92px; z-index: 100;}
 .rotatebg{ position: absolute; width: 185px; height: 185px; background-image:linear-gradient(-45deg,#32EBFC,#FFE14C,#F96C1E,#F81766);transform: rotate(135deg); left: 0; top: 0;}
 .rotatebg:after{ content: ''; display: block; position: absolute; width: 183px; height: 183px; background: #20222b; left: 1px; top: 1px;}
+
+/*仪表盘*/
+.gaugepart{ width: 350px; margin: 0 auto; position: relative; top: 18px;}
+.gaugeCharts{ width: 192px; height: 157px; position: relative; margin: 0 auto; top: 48px; z-index: 1000; background: url("../images/gauge.png") no-repeat;}
+.gaugeSp1,.gaugeSp2,.gaugeSp3,.gaugeSp4,.gaugeSp5,.gaugeSp6,.gaugeSp7{ position: absolute; font-size: 12px; color: #888888;}
+.gaugeActive{ font-size: 14px; color: #fff;}
+.gaugeSp1{ left: 48px; top: 189px;}
+.gaugeSp2{ left: 26px; top: 99px;}
+.gaugeSp3{ left: 67px; top: 37px;}
+.gaugeSp4{ left: 156px; top: 9px;}
+.gaugeSp5{ left: 247px; top: 37px;}
+.gaugeSp6{ left: 288px; top: 99px;}
+.gaugeSp7{ left: 273px; top: 189px;}
+.gaugeBg{ width: 122px; height: 122px; position: absolute; left: 114px; top: 87px;  background: url("../images/gaugeBg.png") no-repeat; background-size: cover; z-index: 100;}
+.gaugePointer{ width: 96px; height: 115px; background: url("../images/pointer.png") no-repeat; background-size:cover; z-index: 200; position: absolute; left: 10px; top: -9px; transform-origin: 84px 101px;transition: linear .8s;}
