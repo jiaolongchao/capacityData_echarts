@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>智能诊股</title>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<link rel="stylesheet" href="css/index.css"/>
+		<script src="js/industryTo.js"></script>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="js/venn.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="tipbar">
+				<div class="tipBarLeft"><span>浦发银行</span><span>大数据诊股</span></div>
+				<a href="javascript:void(0)" onclick="" class="closed">×</a>
+			</div>
+			<div class="content">
+				<div class="tipbarSmall"><i class="icon_bulb"></i>今日提示：业绩平稳，走势一般，建议考虑波段操作</div>
+				<div class="sectionPanel clearfix">
+					<div class="stockMessage partLeft">
+						<span class="stockName">000006  浦发银行</span>
+						<span class="stockNum">12.190<i class="icon_uparrow"></i><em>+2.45 10.02%</em></span>
+						<span class="chiefTitle"><i class="icon_note"></i>综合诊断建议</span>
+						<div class="stockMessageTab">
+							<ul class="stockMegTitle clearfix">
+								<li class="active" id="nav_a1" onclick="setTab('nav_a',1,4)">舆情关注</li>
+								<li id="nav_a2" onclick="setTab('nav_a',2,4)">资金监控</li>
+								<li id="nav_a3" onclick="setTab('nav_a',3,4)">技术分析</li>
+								<li id="nav_a4" onclick="setTab('nav_a',4,4)">价值透视</li>
+							</ul>
+							<div class="stockMegCon" style="display: block" id="nav_a_con1">
+								<p>该股大数据市场市场关注度持续下降，且低于市场平均水平，该股暂时没有太大的关注度。市场整体正情感占优，达到了60%，市场对其比较好。</p>
+								<a href="#" class="askTeacher">求助老师解读</a>
+							</div>
+							<div class="stockMegCon" id="nav_a_con2">--</div>
+							<div class="stockMegCon" id="nav_a_con3">--</div>
+							<div class="stockMegCon" id="nav_a_con4">--</div>
+							<script>
+                                function setTab(name,num,n){
+                                    for(i=1;i<=n;i++){
+                                        var menu=document.getElementById(name+i);
+                                        var con=document.getElementById(name+"_"+"con"+i);
+                                        menu.className=i==num?"active":"";
+                                        con.style.display=i==num?"block":"none";
+                                    }
+                                }
+							</script>
+						</div>
+					</div>
+					<div class="partRight">
+						<div class="cartogram radar">
+							<span class="radar_sp1">观望</span><span class="radar_sp2">风险</span><span class="radar_sp3">机会</span>
+							<div class="radarpart" id="radar">
+								<script src="js/radar.js"></script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="titleBarSmall">
+					<span class="titleBarAcronym">舆情关注</span><span>透视结果浦发银行市场关注度持续下降，市场整体正情感占优，达到了89%，市场对其比较看好，所属概念主题关注度最高的为沪企改革。</span>
+				</div>
+				<div class="sectionPanel clearfix">
+					<div class="partLeft">
+						<div class="headerBarSmall"><span>市场情感：</span><span>市场对浦发银行市场整体正情感占优，达到了90%，市场对其比较看好。</span></div>
+						<div class="cartogram" style="overflow: hidden">
+							<div class="vennLegend">
+								<ul><li><i></i>利好</li><li><i></i>中性</li><li><i></i>利空</li></ul>
+							</div>
+							<div id="venn" style="float: right"></div>
+							<script src="js/vennChart.js"></script>
+						</div>
+					</div>
+					<div class="partRight">
+						<div class="headerBarSmall"><span>主题异动：</span><span>最近一周该股相关主题异动2732次异动比较频繁，超过市场整体水平，建议关注。</span></div>
+						<!--概念涨跌幅-->
+						<div class="cartogram" style="width: 360px; height: 250px; margin: 0 auto;padding-top: 10px;" id="priceLimit"></div>
+						<script src="js/priceLimit.js"></script>
+					</div>
+				</div>
+				<div class="titleBarSmall">
+					<span class="titleBarAcronym">资金监控</span><span>该股当前无连续增减仓现象，主力趋势不明显，过去5个交易日该股主力没有控盘，筹码分布非常分散，主力成交额0.84亿元，占总成交额的6.61%。2017年07月12日,白云机场主力净流入326.93万元，主力资金占比2.37%</span>
+				</div>
+				<div class="sectionPanel clearfix">
+					<div class="partLeft">
+						<div class="headerBarSmall"><span>资金流向：</span><span>今日主力净流入326.93万元，主力资金占比2.37%。其中超大单净流入310.86万元，大单净流入16.07万元</span></div>
+						<div class="cartogram echarts-wrapper-fundFlow">
+							<div class="desc-top-2"></div>
+							<div id="fundFlow" class="main-left"></div>
+							<div class="arrow-x"></div>
+							<div class="arrow-y"></div>
+							<div class="arrow-x-line"></div>
+							<div class="arrow-y-line"></div>
+							<div class="x-percentage">百分比 (%)</div>
+							<div class="y-desc">流入/流出</div>
+							<div id="main-right" class="main-right">
+								<div class="flow-in">
+									<p class="flow-desc">流入<span>453432534</span></p>
+									<p class="extra-large">特大单:<span>2345252</span></p>
+									<p class="large">大单:<span>342143124</span></p>
+									<p class="middle">中单:<span>12341.234</span></p>
+									<p class="small">小单:<span>3412.123</span></p>
+								</div>
+								<div class="flow-out">
+									<p class="flow-desc">流出<span>453432534</span></p>
+									<p class="extra-large">特大单:<span>2345252</span></p>
+									<p class="large">大单:<span>342143124</span></p>
+									<p class="middle">中单:<span>12341.234</span></p>
+									<p class="small">小单:<span>3412.123</span></p>
+								</div>
+							</div>
+							<script src="js/fundFlow.js"></script>
+						</div>
+					</div>
+					<div class="partRight">
+						<div class="headerBarSmall"><span>行业流向：</span><span>交通运输行业该股当前无连续增减仓现象，主力趋势不明显。主力资金占比在该行业中排86/105。</span></div>
+						<div class="cartogram echarts-wrapper-industryTo">
+							<div class="desc-top"></div>
+							<div id="industryTo" class="main"></div>
+							<div class="desc clearfix">
+								<div class="desc-left"><span class="sq"></span>个股资金</div>
+								<div class="desc-right"><span class="line"></span>行业资金</div>
+							</div>
+							<script src="js/industryTo.js"></script>
+						</div>
+					</div>
+				</div>
+				<div class="sectionPanel clearfix">
+					<div class="partLeft">
+						<div class="headerBarSmall"><span>筹码成本：</span><span>近期该股筹码平均交易成本为19.69元，该股获筹码青睐，且集中度渐增。</span></div>
+						<div class="cartogram echarts-wrapper-costChip">
+							<span class="costchipName">筹码成本：19.69</span>
+							<div id="costChip" class="echarts-wrapper-costChip"></div>
+							<script src="js/costChip.js"></script>
+						</div>
+					</div>
+					<div class="partRight">
+						<div class="headerBarSmall"><span>控盘力度：</span><span>过去5个交易日该股主力没有控盘，筹码分布非常分散，主力成交额0.84亿元，占总成交额的6.61%。</span></div>
+						<div class="cartogram">
+							<div class="rotateobj">
+								<span class="rotate_sp1">高度控盘</span><span class="rotate_sp2">轻度控盘</span><span class="rotate_sp3">没有控盘</span><span class="rotate_sp4">中度控盘</span>
+								<div class="rotatpart">
+									<div class="arrow"></div>
+									<div class="rotatebg" style="transform: rotate(135deg) scale(1);"></div>
+									<div class="rotatebg" style="transform: rotate(135deg) scale(0.65);"></div>
+									<div class="rotatebg" style="transform: rotate(135deg) scale(0.35);"></div>
+									<div class="rotatebg" style="transform: rotate(135deg) scale(0.15);"></div>
+								</div>
+								<script>
+									$(function () {
+                                        var BankeDate = 3;  //BankeDate表示接口数据 1:高度控盘 2:轻度 3:没有 4:中度
+                                        var Bankerotate = [0,90,180,270]; //表示箭头指向的角度
+                                        if(BankeDate == 1){
+                                            $('.arrow').css('transform','rotate('+ Bankerotate[0] +'deg)');
+										}else if(BankeDate == 2){
+                                            $('.arrow').css('transform','rotate('+ Bankerotate[1] +'deg)');
+										}else if(BankeDate == 3){
+                                            $('.arrow').css('transform','rotate('+ Bankerotate[2] +'deg)');
+										}else if(BankeDate == 4){
+                                            $('.arrow').css('transform','rotate('+ Bankerotate[3] +'deg)');
+                                        }else{
+                                            $('.arrow').css('transform','rotate('+ Bankerotate[0] +'deg)');
+										}
+                                    })
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="titleBarSmall"><span class="titleBarAcronym">技术分析</span><span>该股多头，且上涨趋势有所加快，建议强烈关注。过去十个交易日，该股走势与大盘没有相关性，走势 接近行业白云机场的筹码成本为19.69，该股获筹码青睐，且集中度渐增。短期阻力位21.84，支撑位16.57，处于震荡区间内。</span></div>
+				<div class="sectionPanel clearfix">
+					<div class="partLeft">
+						<div class="headerBarSmall"><span>多空趋势：</span><span>该股多头，且上涨趋势有所加快，建议强烈关注。</span></div>
+						<div class="cartogram"></div>
+					</div>
+					<div class="partRight">
+						<div class="headerBarSmall"><span>阻力位支撑位：</span><span>该股短期阻力位21.84，支撑位16.57，处于震荡区间内。</span></div>
+						<div class="cartogram"></div>
+					</div>
+				</div>
+				<div class="titleBarSmall"><span class="titleBarAcronym">价值透视</span><span>最近一年，白云机场主营收入平稳增长，公司总体资产亦较为平稳，但增速较低。近期该公司股东人数连续减少。</span></div>
+				<div class="sectionPanel clearfix">
+					<div class="partLeft">
+						<div class="headerBarSmall"><span>盈利能力：</span><span>公司每股收益为0.67，净资产收益率为3.86%，每股收益位居行业前列，强烈建议关注。指标分别在银行行业中排名9/25，3/25。</span></div>
+						<!--盈利能力-->
+						<div class="cartogram echarts-wrapper-profitability">
+							<div class="desc-top">
+								<span class="left-title">每股收益</span>
+								<span class="right-title">净资产收益率</span>
+							</div>
+							<div class="main" id="echarts-wrapper-profitability"></div>
+							<div class="desc clearfix">
+								<div class="desc-left"><span class="sq"></span>每股收益</div>
+								<div class="desc-right"><span class="line"></span>净资产收益率</div>
+							</div>
+							<script src="js/profitability.js"></script>
+						</div>
+					</div>
+					<div class="partRight">
+						<div class="headerBarSmall"><span>成长能力：</span><span>主营收入平稳增长，公司总体资产亦较为平稳，但增速较低。主营业务收入和净利润分别在银行行业排名7/25，8/25。</span></div>
+						<!--成长能力-->
+						<div class="cartogram echarts-wrapper-profitability">
+							<div class="desc-top">
+								<span class="left-title">主营收入</span>
+								<span class="right-title">净利润</span>
+							</div>
+							<div class="main" id="echarts-wrapper-growthability"></div>
+							<div class="desc clearfix">
+								<div class="desc-left"><span class="sq"></span>主营收入(单季)</div>
+								<div class="desc-right"><span class="line"></span>净利润(单季)</div>
+							</div>
+							<script src="js/growthability.js"></script>
+						</div>
+					</div>
+				</div>
+				<div class="sectionPanel clearfix">
+					<div class="partLeft">
+						<div class="headerBarSmall"><span>偿还能力：</span><span>最近报告期，公司资产负债率为93.46%，速动比率为0% 。两个指标分别在银行行业中排名10/25，1/25。</span></div>
+						<!--资产负债率-->
+						<div class="cartogram echarts-wrapper-assetLiability">
+							<div class="desc-top">
+								<span class="left-title">资产负债率</span>
+								<span class="right-title">速度比率</span>
+							</div>
+							<div class="main" id="assetLiability"></div>
+							<div class="desc clearfix">
+								<div class="desc-left"><span class="sq"></span>资产负债率</div>
+								<div class="desc-right"><span class="line"></span>速度比率</div>
+							</div>
+							<script src="js/assetLiability.js"></script>
+						</div>
+					</div>
+					<div class="partRight">
+						<div class="headerBarSmall"><span>偿还能力：</span><span>最近报告期，公司资产负债率为93.46%，速动比率为0% 。两个指标分别在银行行业中排名10/25，1/25。</span></div>
+						<!--股东人数-->
+						<div class="cartogram echarts-wrapper-repayAbility">
+							<div class="title">股东人数</div>
+							<div id="repayAbility" class="main"></div>
+							<div class="desc">
+								<span class="sq"></span>股东人数
+							</div>
+							<script src="js/repayAbility.js"></script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
