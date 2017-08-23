@@ -1,9 +1,11 @@
 /**
  * Created by Administrator on 2017/8/22 0022.
  */
-// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+
+
 var myCharts = echarts.init(document.getElementById("crossEchart"));
-var data0 = splitData([
+// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+var data = [
     ['2013/1/24', 2320.26,2320.26,2287.3,2362.94],
     ['2013/1/25', 2300,2291.3,2288.26,2308.38],
     ['2013/1/28', 2295.35,2346.5,2295.35,2346.92],
@@ -92,7 +94,9 @@ var data0 = splitData([
     ['2013/6/6', 2264.43,2242.11,2240.07,2266.69],
     ['2013/6/7', 2242.26,2210.9,2205.07,2250.63],
     ['2013/6/13', 2190.1,2148.35,2126.22,2190.1]
-]);
+];
+var data0 = splitData(data);
+
 function splitData(rawData) {
     var categoryData = [];
     var values = []
@@ -106,6 +110,13 @@ function splitData(rawData) {
     };
 }
 
+/*data.forEach(function(val,index,arr){
+    for(var i= 1; i < val.length; i++){
+        val[i] = Math.floor(val[i]/100)
+    }
+})
+console.log(data)
+*/
 function calculateMA(dayCount) {
     var result = [];
     for (var i = 0, len = data0.values.length; i < len; i++) {
@@ -139,81 +150,58 @@ option = {
     legend: {
         data: ['日K', 'MA5'],
         show:false
+
     },
     grid: {
         left: '10%',
         right: '10%',
-        bottom: '15%',
-        show:false
+        bottom: '20%'
     },
     xAxis: {
         type: 'category',
         data: data0.categoryData,
         scale: true,
         boundaryGap : false,
-        axisLine: {
-            onZero: false,
-            show:false,
-            lineStyle: { color: '#D1D1D1' }
-        },
+        axisLine: {onZero: false},
         splitLine: {
-            show: true,
-            lineStyle :{
-                color :'#666'
+            show: true,//是否显示分隔线
+            lineStyle: {// 分隔线颜色
+                color: ['#666']
             }
         },
         axisTick :{
-            lineStyle : {
-                color:'rgba(255,255,255,0)' //刻度透明
+            show:false //不显示刻度
+        },
+        axisLabel:{ //是否显示刻度标签
+            show:true,
+            textStyle :{
+                color:'#D1D1D1' //刻度标签的颜色
             }
         },
-        axisLabel:{
-            show:true,
-            color:"#fff"
-        },
-        splitNumber: 5,
+        splitNumber: 20,
         min: 'dataMin',
-        max: 'dataMax',
+        max: 'dataMax'
+    },
+    yAxis: {
+        scale: true,
+        splitNumber: 4,
+        splitLine: {
+            show: true,//是否显示分隔线
+            lineStyle: {// 分隔线颜色
+                color: ['#666']
+            }
+        },
+        axisTick :{
+            show:false //不显示刻度
+        },
+        axisLabel:{ //是否显示刻度标签
+            show:true,
+            textStyle :{
+                color:'#D1D1D1' //刻度标签的颜色
+            }
+        },
 
     },
-    yAxis: [
-        {
-            name: '水量',
-            scale: true,
-            splitArea: {
-                show: false
-            },
-            splitNumber: 4,
-            axisLine: {
-                show:false
-            },
-            axisTick :{ //刻度
-                show:false
-            },
-            splitLine : { //分割线颜色
-                lineStyle :{
-                    color :'#666'
-                }
-            },
-            axisLabel:{ //刻度标签颜色
-                show:true,
-                color:"#fff"
-            }
-        },
-        {
-            name: '水量1',
-            axisLine: {
-                show:true
-            },
-            axisLabel:{
-                show:true,
-                color:"red"
-            },
-            axisTick: {
-                interval: 1
-            }
-        }
-    ],
     dataZoom: [
         {
             type: 'inside',
@@ -233,19 +221,27 @@ option = {
             name: '日K',
             type: 'candlestick',
             data: data0.values,
-            markPoint: {
-                label: {
+            itemStyle:{
+                normal : {
+                    color :'#fd3f3e', //阳线 图形的颜色
+                    color0:'#00a801' //阴线 图形的颜色
+                }
+            },
+            markPoint: { //图表标注
+                label: {//标注的颜色
                     normal: {
                         formatter: function (param) {
                             return param != null ? Math.round(param.value) : '';
-                        }
+                        },
+                        textStyle :{ color:'rgba(255,255,255,0)'}, //最高值的文字颜色
                     }
                 },
+                symbolSize : [0,0], //标注标签的宽高 00就是不显示
                 data: [
                     {
                         name: 'XX标点',
                         coord: ['2013/5/31', 2300],
-                        value: 2300,
+                        value: 23,  //2300
                         itemStyle: {
                             normal: {color: 'rgb(41,60,85)'}
                         }
@@ -272,13 +268,13 @@ option = {
                     }
                 }
             },
-            markLine: {
-                symbol: ['none', 'none'],
+            markLine: { //图表标线
+                symbol: ['none', 'none'], //标线两端的样式 circle
                 data: [
-                    [
+                    [ //起点的数据
                         {
                             name: 'from lowest to highest',
-                            type: 'min',
+                            type: 'min',  //特殊的标注类型，用于标注最大值最小值等
                             valueDim: 'lowest',
                             symbol: 'circle',
                             symbolSize: 10,
@@ -298,20 +294,34 @@ option = {
                             }
                         }
                     ],
-                    {
-                        name: 'min line on close',
-                        type: 'min',
-                        valueDim: 'close'
-                    },
-                    {
-                        name: 'max line on close',
-                        type: 'max',
-                        valueDim: 'close'
-                    }
+                    /*{
+                     name: 'min line on close',
+                     type: 'min',
+                     valueDim: 'close'
+                     },
+                     {
+                     name: 'max line on close',
+                     type: 'max',
+                     valueDim: 'close'
+                     }*/
                 ]
+            }
+        },
+        {
+            name: 'MA5',
+            type: 'line',
+            data: calculateMA(5),
+            smooth: true,
+            lineStyle: {
+                normal: {
+                    color:'#ffca47' //曲线颜色
+                }
             }
         }
 
     ]
 };
+
+
+
 myCharts.setOption(option);
